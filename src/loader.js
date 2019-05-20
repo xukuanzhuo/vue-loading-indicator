@@ -33,11 +33,31 @@ export default class Loader {
 
     this.stateHandler = new Vue({
       computed: {
-        is: () => loader => store.getters[`${vuexModuleName}/is`](loader),
+        is: {
+          cache: false,
+          get: () => loader => store.getters[`${vuexModuleName}/is`](loader)
+        },
         any: () => store.getters[`${vuexModuleName}/any`],
         percent: () => loader => store.getters[`${vuexModuleName}/percent`](loader)
       }
     })
+  }
+
+  dispatchAction (action, loader) {
+    const { vuexModuleName } = this.options
+    this.store.dispatch(`${vuexModuleName}/${action}`, loader)
+  }
+
+  is (loader) {
+    return this.stateHandler.is(loader)
+  }
+
+  start (loader) {
+    this.dispatchAction('start', loader)
+  }
+
+  end (loader) {
+    this.dispatchAction('end', loader)
   }
 }
 

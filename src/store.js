@@ -1,27 +1,26 @@
 'use strict'
 
+import { add, remove, has } from './util.js'
+
 export default {
   namespaced: true,
   state: {
-    loadingFor: [],
-    progresses: {}
+    loadingFor: []
   },
   getters: {
-    is: state => loader => true,
-    any: state => true,
-    percent: state => loader => true
+    is: state => loader => has(state.loadingFor, loader),
+    any: state => state.loadingFor.length > 0,
   },
   actions: {
     start: ({ commit }, loader) => commit('START', loader),
-    end: ({ commit }, loader) => commit('END', loader),
-    progress: ({ commit }, progress) => commit('PROGRESS', progress)
+    end: ({ commit }, loader) => commit('END', loader)
   },
   mutations: {
     ['START'](state, loader) {
+      state.loadingFor = add(state.loadingFor, loader)
     },
     ['END'](state, loader) {
-    },
-    ['PROGRESS'](state, { waiter, current, total }) {
+      state.loadingFor = remove(state.loadingFor, loader)
     }
   }
 }
