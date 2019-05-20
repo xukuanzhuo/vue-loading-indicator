@@ -1,0 +1,14 @@
+{
+  "name": "vuex-loader",
+  "version": "0.0.1",
+  "description": "vuex loading state management",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "vuex"
+  ],
+  "author": "xkz",
+  "license": "MIT"
+}
