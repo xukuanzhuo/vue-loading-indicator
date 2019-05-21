@@ -38,8 +38,7 @@ export default class Loader {
           cache: false,
           get: () => loader => store.getters[`${vuexModuleName}/is`](loader)
         },
-        any: () => store.getters[`${vuexModuleName}/any`],
-        percent: () => loader => store.getters[`${vuexModuleName}/percent`](loader)
+        any: () => store.getters[`${vuexModuleName}/any`]
       }
     })
   }

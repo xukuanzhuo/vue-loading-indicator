@@ -1,3 +1,3 @@
 import Loader from './src/loader.js'
 
-export { Loader }
+export default Loader
