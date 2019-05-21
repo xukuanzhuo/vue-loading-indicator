@@ -1,5 +1,5 @@
 {
-  "name": "vue-loader",
+  "name": "vue-loading-indicator",
   "version": "0.0.1",
   "description": "vue loading state management",
   "main": "lib/bundle.common.js",
