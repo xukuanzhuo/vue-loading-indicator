@@ -4,6 +4,11 @@
       <span v-if="$loader.is('get')">loader loading</span>
       <span v-else>loader not loading</span>
     </div>
+
+    <div>
+      <span v-if="$loader.any">any laoding</span>
+      <span v-else>without any laoding</span>
+    </div>
   </div>
 </template>
 

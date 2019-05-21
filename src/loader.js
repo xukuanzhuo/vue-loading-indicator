@@ -1,6 +1,7 @@
 'use strict'
 
 import vuexStore from './store.js'
+import install from './mixin.js'
 
 export default class Loader {
   constructor(options = {}) {
@@ -43,13 +44,13 @@ export default class Loader {
     })
   }
 
+  get any () {
+    return this.stateHandler.any
+  }
+
   dispatchAction (action, loader) {
     const { vuexModuleName } = this.options
     this.store.dispatch(`${vuexModuleName}/${action}`, loader)
-  }
-
-  is (loader) {
-    return this.stateHandler.is(loader)
   }
 
   start (loader) {
@@ -59,29 +60,10 @@ export default class Loader {
   end (loader) {
     this.dispatchAction('end', loader)
   }
-}
 
-function install (Vue) {
-  Vue.mixin({
-    beforeCreate () {
-      const { loader, store, parent } = this.$options
-      let instance = null
-      if (loader) {
-        instance = loader
-        instance.init(Vue, store)
-      } else if (parent && parent._$loader) {
-        instance = parent._$loader
-        instance.init(Vue, parent.$store)
-      }
-
-      if (instance) {
-        this._$loader = instance
-        this[instance.options.accessorName] = instance
-      }
-    }
-  })
-
-  install.installed = true
+  is (loader) {
+    return this.stateHandler.is(loader)
+  }
 }
 
 Loader.install = install
