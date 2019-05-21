@@ -1,10 +1,21 @@
 {
-  "name": "vuex-loader",
+  "name": "vue-loader",
   "version": "0.0.1",
   "description": "vue loading state management",
-  "main": "index.js",
+  "main": "lib/bundle.common.js",
+  "module": "lib/bundle.esm.js",
   "scripts": {
+    "build": "rollup -c && rollup src/loader.js -o lib/bundle.common.js -f cjs",
     "test": "jest"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "babel-jest": "^24.8.0",
+    "jest": "^24.8.0",
+    "rollup": "^1.12.3",
+    "vue": "^2.6.10",
+    "vuex": "^3.1.1"
   },
   "keywords": [
     "vue",
@@ -12,13 +23,5 @@
     "loader"
   ],
   "author": "xkz",
-  "license": "MIT",
-  "devDependencies": {
-    "@babel/core": "^7.4.4",
-    "@babel/preset-env": "^7.4.4",
-    "babel-jest": "^24.8.0",
-    "jest": "^24.8.0",
-    "vue": "^2.6.10",
-    "vuex": "^3.1.1"
-  }
+  "license": "MIT"
 }
