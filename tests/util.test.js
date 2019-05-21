@@ -1,3 +1,5 @@
+'use strict'
+
 import { add, remove, has } from '../src/util'
 
 test('array add function', () => {
