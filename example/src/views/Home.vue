@@ -1,8 +1,8 @@
 <template>
   <div class="home">
     <div>
-      <span v-if="$loader.is('get')">loader loading</span>
-      <span v-else>loader not loading</span>
+      <span v-if="$loader.is('getList')">getList loading</span>
+      <span v-else>getList not loading</span>
     </div>
 
     <div>
@@ -16,10 +16,11 @@
 export default {
   name: 'home',
   created () {
-    this.$loader.start('get')
-    setTimeout(() => {
-      this.$loader.end('get')
-    }, 3000)
+    this.$store.dispatch('getList')
+
+    setTimeout(()=> {
+      this.$store.dispatch('getItem')
+    }, 5000)
   }
 }
 </script>

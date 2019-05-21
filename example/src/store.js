@@ -11,6 +11,15 @@ export default new Vuex.Store({
 
   },
   actions: {
-
+    getList: async function ({ commit }) {
+      await new Promise(function (resolve, reject) {
+        setTimeout(() => {
+          resolve()
+        }, 3000)
+      })
+    },
+    getItem: function ({ commit }) {
+      console.log('invoke getItem')
+    }
   }
 })
