@@ -1,4 +1,4 @@
-# Vuex action's loadidng Management
+# Vuex action's loading Management
 
 ## Install
 ```bash
