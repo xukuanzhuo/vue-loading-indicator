@@ -32,9 +32,16 @@ function initDispatch () {
     const _dispatch = store.dispatch
 
     store.dispatch = async function (type, payload) {
+      let returnVal
       _dispatch.call(this, `${vuexModuleName}/start`, type)
-      let returnVal = await _dispatch.call(this, type , payload)
-      _dispatch.call(this, `${vuexModuleName}/end`, type)
+
+      try {
+        returnVal = await _dispatch.call(this, type , payload)
+        _dispatch.call(this, `${vuexModuleName}/end`, type)
+      } catch (error) {
+        _dispatch.call(this, `${vuexModuleName}/end`, type)
+      }
+
       return returnVal
     }
   }

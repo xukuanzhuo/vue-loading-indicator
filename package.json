@@ -1,6 +1,6 @@
 {
   "name": "vue-loading-indicator",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "vue loading state management",
   "main": "lib/bundle.common.js",
   "module": "lib/bundle.esm.js",
