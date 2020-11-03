@@ -1,4 +1,6 @@
-export default function install (Vue) {
+import { isPromise } from './util'
+
+export default function install(Vue) {
   Vue.mixin({
     beforeCreate: [
       function initLoader () {
@@ -28,21 +30,29 @@ function initDispatch () {
   const { store } = this.$options
 
   if (store) {
-    const { vuexModuleName } = this.$loader.options
+    const vuexModuleName = 'loader'
     const _dispatch = store.dispatch
 
-    store.dispatch = async function (type, payload) {
-      let returnVal
+    store.dispatch = function (type, payload) {
+      const cxt = this
+
       _dispatch.call(this, `${vuexModuleName}/start`, type)
 
-      try {
-        returnVal = await _dispatch.call(this, type , payload)
-        _dispatch.call(this, `${vuexModuleName}/end`, type)
-      } catch (error) {
-        _dispatch.call(this, `${vuexModuleName}/end`, type)
-      }
+      const ret = _dispatch.call(cxt, type, payload)
 
-      return returnVal
+      if (isPromise(ret)) {
+        return new Promise((resolve, reject) => {
+          ret.then((response) => {
+            _dispatch.call(cxt, `${vuexModuleName}/end`, type)
+            resolve(response)
+          }).catch((error) => {
+            _dispatch.call(cxt, `${vuexModuleName}/end`, type)
+            reject(error)
+          })
+        })
+      } else {
+        return ret
+      }
     }
   }
 }

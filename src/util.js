@@ -19,3 +19,9 @@ export function remove (arr, loader) {
 export function has (arr, loader) {
   return new Set(arr).has(loader)
 }
+
+export function isPromise(obj) {
+  return !!obj
+         && (typeof obj === 'object' || typeof obj === 'function')
+         && typeof obj.then === 'function'
+}

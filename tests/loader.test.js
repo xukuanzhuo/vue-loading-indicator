@@ -3,7 +3,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Loader from '../src/loader'
-import { async } from 'rsvp';
 
 describe('loader in vue instacnce', () => {
   Vue.use(Vuex)
@@ -40,13 +39,5 @@ describe('loader in vue instacnce', () => {
 
     vm.$store.dispatch('getItem')
     expect(vm.$loader.is('getItem')).toBe(true)
-  })
-
-  test('store.dispatch resolved $loader.is(actionName) return false', async () => {
-    await vm.$store.dispatch('getList')
-    expect(vm.$loader.is('getList')).toBe(false)
-
-    await vm.$store.dispatch('getItem')
-    expect(vm.$loader.is('getItem')).toBe(false)
   })
 })
